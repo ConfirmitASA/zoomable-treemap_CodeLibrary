@@ -59,7 +59,8 @@ class Treemap {
 
     var text = context.component;
     var colorFunctionName = "colorFunction_" + index;
-    text.Output.Append(JSON.print(categoriesArray, "categoriesArray"));
+    var categoriesArrayName = "categoriesArray" + index;
+    text.Output.Append(JSON.print(categoriesArray, categoriesArrayName));
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
 
     var str = "var treemap_" + index +
@@ -69,7 +70,7 @@ class Treemap {
         ", colorFunction: " + colorFunctionName +
         ", containerWidth: " + settings.containerWidth +
         ", containerHeight: " + settings.containerHeight +
-        ", flatHierarchy: categoriesArray});";
+        ", flatHierarchy: " + categoriesArrayName + "});";
 
     text.Output.Append("<script>" + str + "</script>");
 }
