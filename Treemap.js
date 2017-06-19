@@ -14,7 +14,7 @@ class Treemap {
     for (var i = 0; i < tables.length; i++) {
         var table = tables[i];
         Treemap.populateGlobals(table);
-        Treemap.setUpTreemap(table);
+        Treemap.setUpTreemap(table, i);
     }
 }
 
@@ -28,7 +28,7 @@ class Treemap {
     }
 }
 
-    static function setUpTreemap(settings) {
+    static function setUpTreemap(settings, index) {
     var rowHeaderTitles = context.report.TableUtils.GetRowHeaderCategoryTitles(settings.tableName);
     var rowHeaderIds = context.report.TableUtils.GetRowHeaderCategoryIds(settings.tableName);
     var rowHeaderValues = context.report.TableUtils.GetColumnValues(settings.tableName, settings.valueColumnIndex);
@@ -58,11 +58,11 @@ class Treemap {
     }
 
     var text = context.component;
-    var colorFunctionName = "colorFunction_" + settings.treemapContainerId;
+    var colorFunctionName = "colorFunction_" + index;
     text.Output.Append(JSON.print(categoriesArray, "categoriesArray"));
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
 
-    var str = "var t_" + settings.treemapContainerId +
+    var str = "var treemap_" + index +
         " = new Reportal.ZoomableTreemap({tableContainerId: '" + settings.tableContainerId +
         "', treemapContainerId: '" + settings.treemapContainerId +
         "', isDrilldownEnabled: " + settings.isDrilldownEnabled +
