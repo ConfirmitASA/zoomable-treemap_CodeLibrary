@@ -31,7 +31,8 @@ class Treemap {
     static function setUpTreemap(settings, index) {
     var rowHeaderTitles = context.report.TableUtils.GetRowHeaderCategoryTitles(settings.tableName);
     var rowHeaderIds = context.report.TableUtils.GetRowHeaderCategoryIds(settings.tableName);
-    var rowHeaderValues = context.report.TableUtils.GetColumnValues(settings.tableName, settings.valueColumnIndex);
+    var valueColumnIndex = settings.valueColumnIndex ? settings.valueColumnIndex : 1;
+    var rowHeaderValues = context.report.TableUtils.GetColumnValues(settings.tableName, valueColumnIndex);
     var colorValues = settings.colorValueColumnIndex ? context.report.TableUtils.GetColumnValues(settings.tableName, settings.colorValueColumnIndex) : rowHeaderValues;
     var rowheaders = [];
 
