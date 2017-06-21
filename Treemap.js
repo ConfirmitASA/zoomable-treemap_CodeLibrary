@@ -70,14 +70,14 @@ class Treemap {
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
 
     var str = "var treemap_" + index +
-        " = new Reportal.ZoomableTreemap({tableContainerId: '" + settings.tableContainerId +
-        "', treemapContainerId: '" + settings.treemapContainerId +
-        "', isDrilldownEnabled: " + settings.isDrilldownEnabled +
-        ", colorFunction: " + colorFunctionName +
-        ", containerWidth: " + settings.containerWidth +
-        ", containerHeight: " + settings.containerHeight +
-        ", title: '" + settings.title +
-        "', flatHierarchy: " + categoriesArrayName + "});";
+        " = new Reportal.ZoomableTreemap({tableContainerId: '" + settings.tableContainerId + "'," +
+        "treemapContainerId: '" + settings.treemapContainerId + "', " +
+        (settings.isDrilldownEnabled ? ("isDrilldownEnabled: " + settings.isDrilldownEnabled + ", ") : "") +
+        (settings.colorFunction ? ("colorFunction: " + colorFunctionName + ", ") : "") +
+        (settings.containerWidth ? ("containerWidth: " + settings.containerWidth + ", ") : "") +
+        (setings.containerHeight ? ("containerHeight: " + settings.containerHeight + ", ") : "") +
+        (settings.title ? ("title: '" + settings.title + "', ") : "") +
+        "flatHierarchy: " + categoriesArrayName + "});";
 
     text.Output.Append("<script>" + str + "</script>");
 }
