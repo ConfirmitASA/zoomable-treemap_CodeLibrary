@@ -76,8 +76,8 @@ class Treemap {
         ", colorFunction: " + colorFunctionName +
         ", containerWidth: " + settings.containerWidth +
         ", containerHeight: " + settings.containerHeight +
-        ", title: " + settings.title +
-        ", flatHierarchy: " + categoriesArrayName + "});";
+        ", title: '" + settings.title +
+        "', flatHierarchy: " + categoriesArrayName + "});";
 
     text.Output.Append("<script>" + str + "</script>");
 }
