@@ -44,7 +44,7 @@ class Treemap {
             colorValue: colorValues[i].Value
         };
     }
-    var project = context.report.DataSource.GetProject(settings.datasourceId);
+
     var schema = context.confirmit.GetDBDesignerSchema(settings.schemaId);
     var table = schema.GetDBDesignerTable(settings.databaseTableName);
     var codes = table.GetColumnValues("id");
@@ -76,6 +76,7 @@ class Treemap {
         ", colorFunction: " + colorFunctionName +
         ", containerWidth: " + settings.containerWidth +
         ", containerHeight: " + settings.containerHeight +
+        ", title: " + settings.title +
         ", flatHierarchy: " + categoriesArrayName + "});";
 
     text.Output.Append("<script>" + str + "</script>");
