@@ -75,7 +75,7 @@ class Treemap {
         (settings.isDrilldownEnabled ? ("isDrilldownEnabled: " + settings.isDrilldownEnabled + ", ") : "") +
         (settings.colorFunction ? ("colorFunction: " + colorFunctionName + ", ") : "") +
         (settings.containerWidth ? ("containerWidth: " + settings.containerWidth + ", ") : "") +
-        (setings.containerHeight ? ("containerHeight: " + settings.containerHeight + ", ") : "") +
+        (settings.containerHeight ? ("containerHeight: " + settings.containerHeight + ", ") : "") +
         (settings.title ? ("title: '" + settings.title + "', ") : "") +
         "flatHierarchy: " + categoriesArrayName + "});";
 
