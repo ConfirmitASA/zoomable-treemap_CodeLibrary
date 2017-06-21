@@ -32,10 +32,16 @@ class Treemap {
     var rowHeaderTitles = context.report.TableUtils.GetRowHeaderCategoryTitles(settings.tableName);
     var rowHeaderIds = context.report.TableUtils.GetRowHeaderCategoryIds(settings.tableName);
     var rowHeaderValues = context.report.TableUtils.GetColumnValues(settings.tableName, settings.valueColumnIndex);
+    var colorValues = settings.colorValueColumnIndex ? context.report.TableUtils.GetColumnValues(settings.tableName, settings.colorValueColumnIndex) : rowHeaderValues;
     var rowheaders = [];
 
     for(var i = 0; i < rowHeaderIds.length; i++) {
-        rowheaders[rowHeaderIds[i][0]] = {title: rowHeaderTitles[i][0], index: i, value: rowHeaderValues[i].Value};
+        rowheaders[rowHeaderIds[i][0]] = {
+            index: i,
+            title: rowHeaderTitles[i][0],
+            value: rowHeaderValues[i].Value,
+            colorValue: colorValues[i].Value
+        };
     }
     var project = context.report.DataSource.GetProject(settings.datasourceId);
     var schema = context.confirmit.GetDBDesignerSchema(settings.schemaId);
@@ -43,8 +49,6 @@ class Treemap {
     var codes = table.GetColumnValues("id");
     var names = table.GetColumnValues("__l9");
     var parents = table.GetColumnValues(settings.parentColumn);
-    var values = new StringCollection();
-    var indices = new StringCollection();
     var categoriesArray = [];
 
     for(var i=0; i<codes.Count; i++){
@@ -53,7 +57,8 @@ class Treemap {
             name: names.Item(i),
             parent: parents.Item(i),
             index: rowheaders[codes.Item(i)].index,
-            value: rowheaders[codes.Item(i)].value
+            value: rowheaders[codes.Item(i)].value,
+            colorValue: rowheaders[codes.Item(i)].colorValue
         });
     }
 
