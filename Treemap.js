@@ -72,18 +72,27 @@ class Treemap {
         context.log.LogDebug('test6.' + i);
         var row = findItem(dataTableRows, searchFunction);
         context.log.LogDebug('test7.' + i);
+        var parent = row[parentColumnName];
+        context.log.LogDebug('test8.' + i);
+        var value = rowHeaderValues[i].Value;
+        context.log.LogDebug('test9.' + i);
+        var colorValue = colorValues[i].Value;
+        context.log.LogDebug('test10.' + i);
+        var name = row[labelColumName];
+        context.log.LogDebug('test11.' + i);
+
         categoriesArray.push({
             id: id,
-            name: row[labelColumName],
-            parent: row[parentColumnName],
+            name: name,
+            parent: parent,
             index: i,
-            value: rowHeaderValues[i].Value,
-            colorValue: colorValues[i].Value
+            value: value,
+            colorValue: colorValues
         });
     }
 
 
-    context.log.LogDebug('test8');
+    context.log.LogDebug('test12');
     /*for(var i=0; i<codes.Count; i++){
         categoriesArray.push({
             id: codes.Item(i),
@@ -101,7 +110,7 @@ class Treemap {
     text.Output.Append(JSON.print(categoriesArray, categoriesArrayName));
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
 
-    context.log.LogDebug('test9');
+    context.log.LogDebug('test13');
     var str = "var treemap_" + index +
         " = new Reportal.ZoomableTreemap({tableContainerId: '" + settings.tableContainerId + "'," +
         "treemapContainerId: '" + settings.treemapContainerId + "', " +
@@ -112,9 +121,9 @@ class Treemap {
         (settings.title ? ("title: '" + settings.title + "', ") : "") +
         "flatHierarchy: " + categoriesArrayName + "});";
 
-    context.log.LogDebug('test10');
+    context.log.LogDebug('test14');
     text.Output.Append("<script>" + str + "</script>");
-    context.log.LogDebug('test11');
+    context.log.LogDebug('test15');
 }
 
     static function findItem(arr, condiion) {
