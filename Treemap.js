@@ -29,30 +29,56 @@ class Treemap {
 }
 
     static function setUpTreemap(settings, index) {
-    var rowHeaderTitles = context.report.TableUtils.GetRowHeaderCategoryTitles(settings.tableName);
+    //var rowHeaderTitles = context.report.TableUtils.GetRowHeaderCategoryTitles(settings.tableName);
     var rowHeaderIds = context.report.TableUtils.GetRowHeaderCategoryIds(settings.tableName);
     var valueColumnIndex = settings.valueColumnIndex ? settings.valueColumnIndex : 1;
     var rowHeaderValues = context.report.TableUtils.GetColumnValues(settings.tableName, valueColumnIndex);
     var colorValues = settings.colorValueColumnIndex ? context.report.TableUtils.GetColumnValues(settings.tableName, settings.colorValueColumnIndex) : rowHeaderValues;
-    var rowheaders = [];
+    //var rowheaders = [];
 
-    for(var i = 0; i < rowHeaderIds.length; i++) {
+    /*for(var i = 0; i < rowHeaderIds.length; i++) {
         rowheaders[rowHeaderIds[i][0]] = {
             index: i,
             title: rowHeaderTitles[i][0],
             value: rowHeaderValues[i].Value,
             colorValue: colorValues[i].Value
         };
-    }
+    }*/
+
+    //var codes = table.GetColumnValues("id");
+    //var names = table.GetColumnValues("__l9");
+    //var parents = table.GetColumnValues(settings.parentColumn);
+
 
     var schema = context.confirmit.GetDBDesignerSchema(settings.schemaId);
     var table = schema.GetDBDesignerTable(settings.databaseTableName);
-    var codes = table.GetColumnValues("id");
-    var names = table.GetColumnValues("__l9");
-    var parents = table.GetColumnValues(settings.parentColumn);
+    var dataTableRows = table.GetDataTable().Rows;
+    var idColumnName = "id";
+    var labelColumName = "__l9";
+    var parentColumnName = settings.parentColumn;
     var categoriesArray = [];
 
-    for(var i=0; i<codes.Count; i++){
+
+    for(var i = 0; i < rowHeaderIds.length; i++) {
+        var id = rowHeaderIds[i][0];
+
+        var searchFunction = function(item) {
+            return item[idColumnName] === id;
+        };
+
+        var row = findItem(dataTableRows, searchFunction);
+
+        categoriesArray.push({
+            id: id,
+            name: row[labelColumName],
+            parent: row[parentColumnName],
+            index: i,
+            value: rowHeaderValues[i].Value,
+            colorValue: colorValues[i].Value
+        });
+    }
+
+    /*for(var i=0; i<codes.Count; i++){
         categoriesArray.push({
             id: codes.Item(i),
             name: names.Item(i),
@@ -61,7 +87,7 @@ class Treemap {
             value: rowheaders[codes.Item(i)].value,
             colorValue: rowheaders[codes.Item(i)].colorValue
         });
-    }
+    }*/
 
     var text = context.component;
     var colorFunctionName = "colorFunction_" + index;
@@ -81,4 +107,14 @@ class Treemap {
 
     text.Output.Append("<script>" + str + "</script>");
 }
+
+    static function findItem(arr, condiion) {
+        for (var i = 0; i < arr.length; i++) {
+            if(condiion(arr[i])) {
+                return arr[i];
+            }
+        }
+
+        return null;
+    }
 }
