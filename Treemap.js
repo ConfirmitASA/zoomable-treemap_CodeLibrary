@@ -106,9 +106,17 @@ class Treemap {
     }*/
 
     var text = context.component;
+
+    context.log.LogDebug('test12.1');
     var colorFunctionName = "colorFunction_" + index;
+
+    context.log.LogDebug('test12.2');
     var categoriesArrayName = "categoriesArray" + index;
+
+    context.log.LogDebug('test12.3');
     text.Output.Append(JSON.print(categoriesArray, categoriesArrayName));
+
+    context.log.LogDebug('test12.4');
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
 
     context.log.LogDebug('test13');
