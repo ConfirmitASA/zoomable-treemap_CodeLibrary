@@ -128,7 +128,7 @@ class Treemap {
 }
 
     static function findItem(arr, condition) {
-        for (var i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.Count; i++) {
             if(condition(arr[i])) {
                 return arr[i];
             }
