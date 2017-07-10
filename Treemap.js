@@ -64,10 +64,10 @@ class Treemap {
     for(var i = 0; i < rowHeaderIds.length; i++) {
 
         context.log.LogDebug('test4.' + i);
-        var id = rowHeaderIds[i][0];
+        var id = rowHeaderIds[i][0].toLowerCase();
         context.log.LogDebug('test5.' + i);
         var searchFunction = function(item) {
-            return item[idColumnName] === id;
+            return item[idColumnName].toLowerCase() === id;
         };
         context.log.LogDebug('test6.' + i);
         var row = findItem(dataTableRows, searchFunction);
