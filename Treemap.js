@@ -72,6 +72,7 @@ class Treemap {
         context.log.LogDebug('test6.' + i);
         var row = findItem(dataTableRows, searchFunction);
         context.log.LogDebug('test7.' + i);
+        context.log.LogDebug(row);
         var parent = row[parentColumnName];
         context.log.LogDebug('test8.' + i);
         var value = rowHeaderValues[i].Value;
@@ -126,9 +127,9 @@ class Treemap {
     context.log.LogDebug('test15');
 }
 
-    static function findItem(arr, condiion) {
+    static function findItem(arr, condition) {
         for (var i = 0; i < arr.length; i++) {
-            if(condiion(arr[i])) {
+            if(condition(arr[i])) {
                 return arr[i];
             }
         }
