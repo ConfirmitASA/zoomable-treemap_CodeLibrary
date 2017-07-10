@@ -19,9 +19,7 @@ class Treemap {
 }
 
     static function populateGlobals(table) {
-    context.log.LogDebug('checking keys');
     for (var key in Treemap.globalSettings) {
-        context.log.LogDebug('key = ' + key);
         if(!table[key]) {
             table[key] = Treemap.globalSettings[key];
         }
@@ -62,8 +60,6 @@ class Treemap {
             colorValue: colorValue
         });
     }
-
-    context.log.LogDebug('test12');
 
     var text = context.component;
     var colorFunctionName = "colorFunction_" + index;
