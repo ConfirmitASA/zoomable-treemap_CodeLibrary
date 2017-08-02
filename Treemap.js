@@ -63,15 +63,18 @@ class Treemap {
 
     var text = context.component;
     var colorFunctionName = "colorFunction_" + index;
+    var paletteName = "treemapPalette_" + index;
     var categoriesArrayName = "categoriesArray" + index;
     text.Output.Append(JSON.print(categoriesArray, categoriesArrayName));
     text.Output.Append(JSON.print(settings.colorFunction, colorFunctionName));
+    text.Output.Append(JSON.print(settings.palette, paletteName));
 
     var str = "var treemap_" + index +
         " = new Reportal.ZoomableTreemap({tableContainerId: '" + settings.tableContainerId + "'," +
         "treemapContainerId: '" + settings.treemapContainerId + "', " +
         (settings.isDrilldownEnabled ? ("isDrilldownEnabled: " + settings.isDrilldownEnabled + ", ") : "") +
         (settings.colorFunction ? ("colorFunction: " + colorFunctionName + ", ") : "") +
+        (settings.palette ? ("palette: " + paletteName + ", ") : "") +
         (settings.containerWidth ? ("containerWidth: " + settings.containerWidth + ", ") : "") +
         (settings.containerHeight ? ("containerHeight: " + settings.containerHeight + ", ") : "") +
         (settings.title ? ("title: '" + settings.title + "', ") : "") +
